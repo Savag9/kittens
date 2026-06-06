@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KittenNest - Premium Products For Kittens</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0b0f14;
+            --bg-secondary: #121923;
+            --card: #171f2b;
+            --border: rgba(255, 255, 255, .08);
+
+            --text: #f5f7fa;
+            --text-muted: #9ca8b7;
+
+            --blue: #4dc4ff;
+            --blue-dark: #1f8cff;
+            --blue-glow: rgba(77, 196, 255, .45);
+
+            --radius: 24px;
+            --transition: .35s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Background */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(77, 196, 255, .12), transparent 30%),
+                radial-gradient(circle at 80% 15%, rgba(77, 196, 255, .09), transparent 25%),
+                radial-gradient(circle at 50% 90%, rgba(77, 196, 255, .07), transparent 35%);
+            pointer-events: none;
+        }
+
+        .container {
+            width: min(1200px, 90%);
+            margin: auto;
+        }
+
+        /* Header */
+
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(14px);
+            background: rgba(10, 15, 20, .75);
+            border-bottom: 1px solid rgba(255, 255, 255, .05);
+        }
+
+        nav {
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: .5px;
+        }
+
+        .logo span {
+            color: var(--blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--blue);
+        }
+
+        .nav-btn {
+            padding: 12px 22px;
+            border: none;
+            border-radius: 999px;
+            color: white;
+            background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+            cursor: pointer;
+            box-shadow: 0 0 30px var(--blue-glow);
+            transition: var(--transition);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Hero */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            line-height: 1;
+            margin-bottom: 24px;
+        }
+
+        .hero-content h1 span {
+            color: var(--blue);
+            text-shadow: 0 0 20px var(--blue-glow);
+        }
+
+        .hero-content p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 650px;
+        }
+
+        .hero-buttons {
+            margin-top: 35px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            padding: 16px 28px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .primary-btn {
+            color: white;
+            background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+            box-shadow: 0 0 35px rgba(77, 196, 255, .4);
+        }
+
+        .secondary-btn {
+            border: 1px solid rgba(255, 255, 255, .15);
+            color: white;
+        }
+
+        .primary-btn:hover,
+        .secondary-btn:hover {
+            transform: translateY(-4px);
+        }
+
+        .hero-card {
+            position: relative;
+            background: linear-gradient(145deg, #131b26, #1b2431);
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            padding: 40px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, .4);
+        }
+
+        .hero-card::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: var(--blue);
+            filter: blur(120px);
+            opacity: .15;
+            top: -100px;
+            right: -100px;
+        }
+
+        .kitten-emoji {
+            font-size: 10rem;
+            text-align: center;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .stat {
+            background: rgba(255, 255, 255, .03);
+            border-radius: 20px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .stat h3 {
+            color: var(--blue);
+        }
+
+        /* Section */
+
+        section {
+            padding: 110px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+        }
+
+        /* Products */
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product {
+            background: linear-gradient(145deg, #121923, #1b2431);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(77, 196, 255, .12);
+            border-color: rgba(77, 196, 255, .3);
+        }
+
+        .product-image {
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            background: rgba(255, 255, 255, .02);
+        }
+
+        .product-content {
+            padding: 25px;
+        }
+
+        .product-content h3 {
+            margin-bottom: 10px;
+        }
+
+        .product-content p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            color: var(--blue);
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .buy-btn {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(77, 196, 255, .4);
+            border-radius: 999px;
+            padding: 10px 18px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .buy-btn:hover {
+            background: var(--blue);
+            color: #00111d;
+        }
+
+        /* Features */
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .feature {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px;
+            transition: var(--transition);
+        }
+
+        .feature:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 0 25px rgba(77, 196, 255, .12);
+        }
+
+        .feature-icon {
+            font-size: 2.4rem;
+            margin-bottom: 15px;
+        }
+
+        /* CTA */
+
+        .cta {
+            background: linear-gradient(135deg,
+                    rgba(77, 196, 255, .12),
+                    rgba(77, 196, 255, .04));
+            border: 1px solid rgba(77, 196, 255, .15);
+            border-radius: 36px;
+            padding: 60px;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.8;
+        }
+
+        .cta a {
+            margin-top: 30px;
+            display: inline-block;
+        }
+
+        /* Footer */
+
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, .05);
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Animations */
+
+        .hidden {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: .8s ease;
+        }
+
+        .show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile */
+
+        @media(max-width:900px) {
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .hero-content p {
+                margin: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .cta {
+                padding: 40px 25px;
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Kitten<span>Nest</span></div>
+
+                <div class="nav-links">
+                    <a href="#products">Products</a>
+                    <a href="#benefits">Benefits</a>
+                    <a href="#about">About</a>
+                </div>
+
+                <button class="nav-btn">Shop Now</button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+
+                <div class="hero-content hidden">
+                    <h1>Premium Care For Your <span>Little Kitten</span></h1>
+
+                    <p>
+                        Discover premium food, toys, beds, and accessories
+                        designed specifically for growing kittens. Healthy,
+                        playful, and happy from day one.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="#products" class="primary-btn">Explore Products</a>
+                        <a href="#about" class="secondary-btn">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="hero-card hidden">
+                    <div class="kitten-emoji">🐱</div>
+
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <h3>5K+</h3>
+                            <p>Happy Owners</p>
+                        </div>
+
+                        <div class="stat">
+                            <h3>120+</h3>
+                            <p>Products</p>
+                        </div>
+
+                        <div class="stat">
+                            <h3>24/7</h3>
+                            <p>Support</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="products">
+        <div class="container">
+
+            <div class="section-title hidden">
+                <h2>Featured Products</h2>
+                <p>Everything your kitten needs for a healthy start.</p>
+            </div>
+
+            <div class="products-grid">
+
+                <div class="product hidden">
+                    <div class="product-image">🍼</div>
+
+                    <div class="product-content">
+                        <h3>Kitten Formula Milk</h3>
+                        <p>Rich in vitamins and nutrients for healthy growth.</p>
+
+                        <div class="price-row">
+                            <div class="price">$19</div>
+                            <button class="buy-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product hidden">
+                    <div class="product-image">🧸</div>
+
+                    <div class="product-content">
+                        <h3>Interactive Toy Set</h3>
+                        <p>Stimulates activity, curiosity and learning.</p>
+
+                        <div class="price-row">
+                            <div class="price">$24</div>
+                            <button class="buy-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product hidden">
+                    <div class="product-image">🛏️</div>
+
+                    <div class="product-content">
+                        <h3>Luxury Kitten Bed</h3>
+                        <p>Ultra-soft comfort with premium materials.</p>
+
+                        <div class="price-row">
+                            <div class="price">$39</div>
+                            <button class="buy-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product hidden">
+                    <div class="product-image">🍖</div>
+
+                    <div class="product-content">
+                        <h3>Natural Treats</h3>
+                        <p>Healthy snacks made from quality ingredients.</p>
+
+                        <div class="price-row">
+                            <div class="price">$12</div>
+                            <button class="buy-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section id="benefits">
+        <div class="container">
+
+            <div class="section-title hidden">
+                <h2>Why Choose Us</h2>
+                <p>Trusted by thousands of kitten owners worldwide.</p>
+            </div>
+
+            <div class="features">
+
+                <div class="feature hidden">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Fast Delivery</h3>
+                    <p>Quick shipping directly to your doorstep.</p>
+                </div>
+
+                <div class="feature hidden">
+                    <div class="feature-icon">💎</div>
+                    <h3>Premium Quality</h3>
+                    <p>Only carefully selected kitten products.</p>
+                </div>
+
+                <div class="feature hidden">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Safe Materials</h3>
+                    <p>Products designed with safety in mind.</p>
+                </div>
+
+                <div class="feature hidden">
+                    <div class="feature-icon">❤️</div>
+                    <h3>Kitten Approved</h3>
+                    <p>Loved by playful kittens everywhere.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+
+            <div class="cta hidden">
+                <h2>Give Your Kitten The Best Start In Life</h2>
+
+                <p>
+                    Explore our premium collection of food, toys,
+                    accessories and comfort products designed for growing
+                    kittens. Quality, safety and happiness in every order.
+                </p>
+
+                <a href="#products" class="primary-btn">
+                    Start Shopping
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            © 2026 KittenNest. Premium Products For Kittens.
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, {
+            threshold: 0.15
+        });
+
+        document.querySelectorAll('.hidden')
+            .forEach(el => observer.observe(el));
+
+        document.querySelectorAll('.buy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.textContent = "Added ✓";
+
+                setTimeout(() => {
+                    btn.textContent = "Add to Cart";
+                }, 1500);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
